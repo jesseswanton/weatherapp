@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 
 // TODO: Define a City class with name and id properties
 class City {
-  constructor(public id: string, public name: string) {}
+  constructor(public id: string, public cityName: string) {}
 }
 
 // TODO: Complete the HistoryService class
@@ -10,9 +10,10 @@ class HistoryService {
   // TODO: Define a read method that reads from the searchHistory.json file
   public async read(): Promise<City[]> {
     try {
-      const data = await fs.readFile('searchHistory.json', 'utf-8');
+      const data = await fs.readFile('./searchHistory.json', 'utf-8');
       return JSON.parse(data).map((cityName: any) => new City(cityName.id, cityName.name));
-    } catch (error) {
+    } 
+      catch (error) {
       console.error('Error reading search history:', error);
       return [];
     }
@@ -21,8 +22,9 @@ class HistoryService {
   public async write(cities: City[]): Promise<void> {
     try {
       const data = JSON.stringify(cities, null, 2);
-      await fs.writeFile('searchHistory.json', data, 'utf-8');
-    } catch (error) {
+      await fs.writeFile('./searchHistory.json', data, 'utf-8');
+    } 
+      catch (error) {
       console.error('Error writing search history:', error);
     }
   }
