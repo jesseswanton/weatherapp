@@ -1,4 +1,4 @@
-const fs = require('fs').promises;
+import { promises as fs } from 'fs';
 
 // TODO: Define a City class with name and id properties
 class City {
@@ -11,7 +11,7 @@ class HistoryService {
   public async read(): Promise<City[]> {
     try {
       const data = await fs.readFile('searchHistory.json', 'utf-8');
-      return JSON.parse(data).map((city: any) => new City(city.id, city.name));
+      return JSON.parse(data).map((cityName: any) => new City(cityName.id, cityName.name));
     } catch (error) {
       console.error('Error reading search history:', error);
       return [];
